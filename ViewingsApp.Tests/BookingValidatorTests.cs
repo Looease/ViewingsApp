@@ -10,6 +10,20 @@ namespace ViewingsApp.Tests
 {
     public class Tests
     {
+        private BookingRequest ValidRequest(){
+             return new BookingRequest
+            {
+                AgentId  = 1,
+                PropertyId = 3,
+                Name = "Rebecca",
+                EmailAddress = "rebecca@hotmail.com",
+                StartsAt = DateTime.Now.AddHours(2),
+                EndsAt = DateTime.Now.AddHours(3),
+                PhoneNumber = "0300 547 873"
+            };
+        }
+        
+        
         private readonly List<Agent> _agents = new List<Agent>
         {
             new Agent
@@ -39,20 +53,11 @@ namespace ViewingsApp.Tests
         public void ValidBookingPassesValidation()
         {
             // Arrange
-            var bookingRequest = new BookingRequest
-            {
-                AgentId  = 1,
-                PropertyId = 3,
-                Name = "Rebecca",
-                EmailAddress = "rebecca@hotmail.com",
-                StartsAt = DateTime.Now.AddHours(2),
-                EndsAt = DateTime.Now.AddHours(3),
-                PhoneNumber = "0300 547 873"
-            };
+         
             var bookingValidator = new BookingValidator();
 
             // Act
-            var bookingValidation = bookingValidator.ValidateBooking(bookingRequest, _agents, _properties);
+            var bookingValidation = bookingValidator.ValidateBooking(ValidRequest(), _agents, _properties);
 
             // Assert
             bookingValidation.IsValid.Should().BeTrue();
@@ -63,16 +68,10 @@ namespace ViewingsApp.Tests
         public void ShouldFailIfNameIsMissing()
         {
             // Arrange
-            var bookingRequest = new BookingRequest
-            {
-                AgentId  = 1,
-                PropertyId = 3,
-                Name = "",
-                EmailAddress = "rebecca@hotmail.com",
-                StartsAt = DateTime.Now.AddHours(2),
-                EndsAt = DateTime.Now.AddHours(3),
-                PhoneNumber = "0300 547 873"
-            };
+            var bookingRequest = ValidRequest();
+
+            bookingRequest.Name = "";
+          
             var bookingValidator = new BookingValidator();
 
             // Act
