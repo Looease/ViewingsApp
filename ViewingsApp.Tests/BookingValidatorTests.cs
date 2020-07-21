@@ -70,7 +70,7 @@ namespace ViewingsApp.Tests
             // Arrange
             var bookingRequest = ValidRequest();
 
-            bookingRequest.Name = "";
+            bookingRequest.Name = null;
           
             var bookingValidator = new BookingValidator();
 
@@ -88,7 +88,7 @@ namespace ViewingsApp.Tests
             // Arrange
             var bookingRequest = ValidRequest();
 
-            bookingRequest.PhoneNumber = "";
+            bookingRequest.PhoneNumber = null;
           
             var bookingValidator = new BookingValidator();
 

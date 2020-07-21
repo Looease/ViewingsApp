@@ -14,11 +14,11 @@ namespace ViewingsApp.Services
     {
         public BookingValidation ValidateBooking(BookingRequest bookingRequest, IEnumerable<Agent> allAgents, IEnumerable<Property> allProperties)
         {
-            if (bookingRequest.Name == "")
+            if (string.IsNullOrWhiteSpace(bookingRequest.Name))
             {
                 return BookingValidation.Invalid("You must provide a name");
             }
-             if (bookingRequest.PhoneNumber == "")
+             if (string.IsNullOrWhiteSpace(bookingRequest.PhoneNumber))
             {
                 return BookingValidation.Invalid("You must provide a valid phone number");
             }
