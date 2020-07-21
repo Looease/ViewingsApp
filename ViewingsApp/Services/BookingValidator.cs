@@ -16,19 +16,25 @@ namespace ViewingsApp.Services
         {
             if (bookingRequest.Name == "")
             {
-                return new BookingValidation 
-                { 
-                    IsValid = false, ErrorMessage = "You must provide a name" 
-                };
+                return BookingValidation.Invalid("You must provide a name");
+            }
+             if (bookingRequest.PhoneNumber == "")
+            {
+                return BookingValidation.Invalid("You must provide a valid phone number");
             }
             return new BookingValidation 
             { 
                 IsValid = true, ErrorMessage = "" 
             };
+           
         }
     }
 }
 
+
+
+
+//Longer versions of above code 
 //     if (bookingRequest.Name == null)
 //     {
 //         return new BookingValidation
@@ -43,3 +49,11 @@ namespace ViewingsApp.Services
 //         ErrorMessage = ""
 //     };
 // }
+
+//Old version of 3rd test
+//    if (bookingRequest.PhoneNumber == "")
+//             {
+//                 return new BookingValidation
+//                 {
+//                     IsValid = false, ErrorMessage = "You must provide a valid phone number"
+//                 };

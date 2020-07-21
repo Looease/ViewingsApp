@@ -81,5 +81,23 @@ namespace ViewingsApp.Tests
             bookingValidation.IsValid.Should().BeFalse();
             bookingValidation.ErrorMessage.Should().Be("You must provide a name");
         }
+
+        [Test]
+        public void ShouldFailIfPhoneNumberIsMissing()
+        {
+            // Arrange
+            var bookingRequest = ValidRequest();
+
+            bookingRequest.PhoneNumber = "";
+          
+            var bookingValidator = new BookingValidator();
+
+            // Act
+            var bookingValidation = bookingValidator.ValidateBooking(bookingRequest, _agents, _properties);
+
+            // Assert
+            bookingValidation.IsValid.Should().BeFalse();
+            bookingValidation.ErrorMessage.Should().Be("You must provide a valid phone number");
+        }
     }
 }
